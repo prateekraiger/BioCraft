@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 
 const HomePage = () => {
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen">
       <HeroSection />
 
       {/* Features Section */}
@@ -74,10 +74,6 @@ const HomePage = () => {
           </div>
         </div>
       </section>
-
-      <footer className="py-6 text-center text-sm text-muted-foreground">
-        <p>© 2024 BioCraft. All rights reserved.</p>
-      </footer>
     </div>
   );
 };
