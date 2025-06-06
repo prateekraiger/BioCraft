@@ -1,17 +1,14 @@
 import React from "react";
 import { Link, useLocation } from "react-router-dom";
+import { Button } from "@/components/ui/button";
 import { Sparkles } from "lucide-react";
 
 interface LayoutProps {
   children: React.ReactNode;
 }
 
-const Layout = ({ children }: LayoutProps) => {
+export const Layout = ({ children }: LayoutProps) => {
   const location = useLocation();
-
-  const isActive = (path: string) => {
-    return location.pathname === path;
-  };
 
   return (
     <div className="min-h-screen bg-background">
@@ -26,20 +23,33 @@ const Layout = ({ children }: LayoutProps) => {
             <Link
               to="/"
               className={`text-sm font-medium transition-colors hover:text-primary ${
-                isActive("/") ? "text-primary" : "text-muted-foreground"
+                location.pathname === "/"
+                  ? "text-primary"
+                  : "text-muted-foreground"
               }`}
             >
               Home
             </Link>
             <Link
-              to="/about"
+              to="/generator"
               className={`text-sm font-medium transition-colors hover:text-primary ${
-                isActive("/about") ? "text-primary" : "text-muted-foreground"
+                location.pathname === "/generator"
+                  ? "text-primary"
+                  : "text-muted-foreground"
               }`}
             >
-              About
+              Bio Generator
             </Link>
           </nav>
+
+          <div className="flex items-center gap-4">
+            <Link to="/generator">
+              <Button className="font-medium">
+                <Sparkles className="w-4 h-4 mr-2" />
+                Create Bio
+              </Button>
+            </Link>
+          </div>
         </div>
       </header>
 

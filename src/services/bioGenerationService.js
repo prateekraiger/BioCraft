@@ -1,8 +1,9 @@
+// Get API key from environment variable
+const API_KEY = import.meta.env.VITE_OPENROUTER_API_KEY;
 
-
-// API key for OpenRouter - for demo purposes only
-const API_KEY =
-  "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";
+if (!API_KEY) {
+  console.error("OpenRouter API key is not set in environment variables");
+}
 
 /**
  * Generate bio options using OpenRouter API
@@ -12,6 +13,10 @@ const API_KEY =
  */
 export const generateBiosWithAI = async (formData, limit) => {
   try {
+    if (!API_KEY) {
+      throw new Error("API key is not configured");
+    }
+
     // Create prompt for the API
     const prompt = `Generate 3 creative, engaging bio options for ${
       formData.platform
