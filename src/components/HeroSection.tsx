@@ -93,7 +93,7 @@ export const HeroSection = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.6 }}
             >
-              <Link to="/generator">
+              <Link to="/bio-generator">
                 <Button
                   size="lg"
                   className="group relative overflow-hidden bg-primary hover:bg-primary/90"
@@ -141,45 +141,6 @@ export const HeroSection = () => {
             </div>
           </motion.div>
         </div>
-
-        {/* Features */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.8 }}
-          className="grid grid-cols-1 sm:grid-cols-3 gap-6 mt-16 max-w-4xl mx-auto"
-        >
-          {[
-            {
-              title: "Platform Optimized",
-              description:
-                "Tailored bios for each social media platform's unique requirements",
-              icon: "🎯",
-            },
-            {
-              title: "AI-Powered",
-              description:
-                "Advanced AI technology to generate creative and engaging bios",
-              icon: "✨",
-            },
-            {
-              title: "Instant Results",
-              description: "Get multiple bio options in seconds, ready to use",
-              icon: "⚡",
-            },
-          ].map((feature, index) => (
-            <div
-              key={index}
-              className="p-4 rounded-lg bg-muted/30 hover:bg-muted/50 transition-colors duration-200"
-            >
-              <div className="text-3xl mb-2">{feature.icon}</div>
-              <h3 className="font-semibold mb-2">{feature.title}</h3>
-              <p className="text-sm text-muted-foreground">
-                {feature.description}
-              </p>
-            </div>
-          ))}
-        </motion.div>
       </div>
     </div>
   );
