@@ -136,8 +136,8 @@ const BioGenerator = () => {
   };
 
   return (
-    <Card className="shadow-lg border-t-4 border-t-black/10 transition-all duration-300 hover:shadow-xl">
-      <CardHeader className="bg-white/50 p-6 sm:p-8">
+    <Card className="shadow-lg border-t-4 border-t-black/10 transition-all duration-300 hover:shadow-xl bg-white/80 backdrop-blur-sm">
+      <CardHeader className="bg-white/50 p-6 sm:p-8 border-b border-black/5">
         <CardTitle className="text-2xl sm:text-3xl font-bold text-center text-black">
           Create Your Bio
         </CardTitle>
