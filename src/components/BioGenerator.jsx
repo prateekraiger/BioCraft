@@ -425,29 +425,50 @@ const BioGenerator = () => {
               </div>
             </CardContent>
 
-            <CardFooter className="flex flex-col sm:flex-row gap-4 justify-end px-4 sm:px-8 pb-6 sm:pb-8">
-              <Button
-                type="button"
-                variant="outline"
-                onClick={resetForm}
-                className="w-full sm:w-auto"
-              >
-                Reset Form
-              </Button>
-              <Button
-                type="submit"
-                disabled={isGenerating}
-                className="w-full sm:w-auto bg-black text-white hover:bg-black/90"
-              >
-                {isGenerating ? (
+            <CardFooter className="flex flex-col gap-4 px-4 sm:px-8 pb-6 sm:pb-8 border-t border-black/10 mt-8">
+              <div className="flex flex-col sm:flex-row gap-3 justify-center items-center w-full">
+                <Button
+                  type="submit"
+                  disabled={isGenerating}
+                  className="w-full sm:w-auto px-8 py-2 bg-black text-white hover:bg-black/90"
+                >
+                  {isGenerating ? (
+                    <span className="flex items-center gap-2">
+                      <RefreshCw className="w-4 h-4 animate-spin" />
+                      Generating...
+                    </span>
+                  ) : (
+                    "Generate Bio"
+                  )}
+                </Button>
+                <Button
+                  type="button"
+                  variant="outline"
+                  onClick={resetForm}
+                  className="w-full sm:w-auto px-8 py-2 border-black/20 hover:bg-black/5 hover:border-black/30 text-black/70 hover:text-black"
+                >
                   <span className="flex items-center gap-2">
-                    <RefreshCw className="w-4 h-4 animate-spin" />
-                    Generating...
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="16"
+                      height="16"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      className="transition-transform duration-200 group-hover:rotate-180"
+                    >
+                      <path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8" />
+                      <path d="M21 3v5h-5" />
+                      <path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16" />
+                      <path d="M8 16H3v5" />
+                    </svg>
+                    Reset Form
                   </span>
-                ) : (
-                  "Generate Bio"
-                )}
-              </Button>
+                </Button>
+              </div>
             </CardFooter>
           </form>
         </TabsContent>
@@ -465,7 +486,7 @@ const BioGenerator = () => {
               ))}
             </div>
           </CardContent>
-          <CardFooter className="flex flex-col sm:flex-row justify-between gap-4 px-6 sm:px-8 pb-6 sm:pb-8">
+          <CardFooter className="flex flex-col sm:flex-row justify-between gap-4 px-6 sm:px-8 pb-6 sm:pb-8 border-t border-black/10">
             <Button
               type="button"
               variant="outline"
@@ -486,7 +507,7 @@ const BioGenerator = () => {
               {isGenerating ? (
                 <span className="flex items-center gap-2">
                   <RefreshCw className="w-4 h-4 animate-spin" />
-                  Regenerating...
+                  Regenerate Bios
                 </span>
               ) : (
                 "Regenerate Bios"

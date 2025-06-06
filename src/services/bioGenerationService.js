@@ -1,12 +1,12 @@
 // Get API key from environment variable
-const API_KEY = import.meta.env.VITE_OPENROUTER_API_KEY;
+const API_KEY = "sk-p4qx8pzMm4WaTeBjYNn4WxhXizqlmQJctQAdTtSIQctXsfdg";
 
 if (!API_KEY) {
-  console.error("OpenRouter API key is not set in environment variables");
+  console.error("API key is not set");
 }
 
 /**
- * Generate bio options using OpenRouter API
+ * Generate bio options using ChatAnywhere API
  * @param {Object} formData - User input for bio generation
  * @param {number} limit - Character limit for the platform
  * @returns {Promise<string[]>} - Array of generated bio options
@@ -36,19 +36,17 @@ export const generateBiosWithAI = async (formData, limit) => {
     bio1|||bio2|||bio3
     `;
 
-    // Call OpenRouter API
+    // Call ChatAnywhere API
     const response = await fetch(
-      "https://openrouter.ai/api/v1/chat/completions",
+      "https://api.chatanywhere.com.cn/v1/chat/completions",
       {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${API_KEY}`,
-          "HTTP-Referer": window.location.href,
-          "X-Title": "Social Media Bio Generator",
         },
         body: JSON.stringify({
-          model: "openai/gpt-3.5-turbo",
+          model: "gpt-3.5-turbo",
           messages: [
             {
               role: "system",
@@ -61,6 +59,7 @@ export const generateBiosWithAI = async (formData, limit) => {
             },
           ],
           max_tokens: 500,
+          temperature: 0.7,
         }),
       }
     );

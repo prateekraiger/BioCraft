@@ -59,7 +59,7 @@ const HomePage = () => {
           </div>
 
           <div className="text-center mt-12">
-            <Link to="/generator">
+            <Link to="/bio-generator">
               <Button
                 size="lg"
                 className="group relative overflow-hidden bg-primary hover:bg-primary/90"
