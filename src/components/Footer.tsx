@@ -1,51 +1,54 @@
-import {
-  FaLinkedinIn,
-  FaGithub,
-  FaTwitterSquare,
-  FaInstagram,
-} from "react-icons/fa";
+import { Link } from "react-router-dom";
+import { FaTwitter, FaLinkedin, FaInstagram } from "react-icons/fa";
 
-const socialLinks = [
-  {
-    href: "https://www.linkedin.com/in/pratik-r1104/",
-    icon: <FaLinkedinIn />,
-  },
-  { href: "https://github.com/prateekraiger", icon: <FaGithub /> },
-  { href: "https://x.com/mrpratik753", icon: <FaTwitterSquare /> },
-  { href: "https://instagram.com", icon: <FaInstagram /> },
-];
-
-const Footer = () => {
+export const Footer = () => {
   return (
-    <footer className="w-full bg-[#5542ff] py-4 sm:py-6 text-[#dfdff0]/[.8]">
-      <div className="container mx-auto flex flex-col items-center justify-between gap-4 px-4 sm:flex-row">
-        <p className="text-center text-xs sm:text-sm font-light md:text-left transition-colors duration-500 ease-in-out hover:text-white">
-          © 2024 BioCraft. All rights reserved
-        </p>
+    <footer className="w-full bg-white/70 backdrop-blur-md border-t border-black/10">
+      <div className="container mx-auto px-4 py-8">
+        <div className="flex flex-col md:flex-row justify-between items-center gap-6">
+          <div className="text-center md:text-left">
+            <p className="text-sm text-black/70">
+              © {new Date().getFullYear()} BioCraft. All rights reserved.
+            </p>
+          </div>
 
-        <div className="flex justify-center gap-2 sm:gap-4 md:justify-start">
-          {socialLinks.map((link, index) => (
+          <div className="flex items-center gap-6">
             <a
-              key={index}
-              href={link.href}
+              href="https://twitter.com"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-[#dfdff0]/[.8] hover-glow transition-colors duration-500 ease-in-out hover:text-white text-base sm:text-lg"
+              className="text-black/70 hover:text-black transition-colors duration-300 transform hover:scale-110"
             >
-              {link.icon}
+              <FaTwitter className="w-5 h-5" />
             </a>
-          ))}
-        </div>
+            <a
+              href="https://linkedin.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-black/70 hover:text-black transition-colors duration-300 transform hover:scale-110"
+            >
+              <FaLinkedin className="w-5 h-5" />
+            </a>
+            <a
+              href="https://instagram.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-black/70 hover:text-black transition-colors duration-300 transform hover:scale-110"
+            >
+              <FaInstagram className="w-5 h-5" />
+            </a>
+          </div>
 
-        <a
-          href="#privacy-policy"
-          className="text-center text-xs sm:text-sm font-light hover:underline md:text-right hover:text-white transition-colors duration-500 ease-in-out"
-        >
-          Privacy Policy
-        </a>
+          <div className="text-center md:text-right">
+            <Link
+              to="/privacy"
+              className="text-sm text-black/70 hover:text-black transition-colors duration-300"
+            >
+              Privacy Policy
+            </Link>
+          </div>
+        </div>
       </div>
     </footer>
   );
 };
-
-export default Footer;
