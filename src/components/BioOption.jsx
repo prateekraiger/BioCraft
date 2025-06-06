@@ -40,39 +40,39 @@ const BioOption = ({ bio, index, platform }) => {
   };
 
   return (
-    <Card className="group relative overflow-hidden border-l-4 border-l-primary/50 transition-all duration-300 hover:border-l-primary hover:shadow-md">
-      <CardContent className="p-4 sm:p-6">
-        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 sm:gap-4 mb-3">
-          <div className="flex items-center gap-2">
+    <Card className="group relative overflow-hidden border-l-4 border-l-black/10 transition-all duration-300 hover:border-l-black/30 hover:shadow-md">
+      <CardContent className="p-6 sm:p-8">
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 sm:gap-4 mb-4">
+          <div className="flex items-center gap-3">
             <Badge
               variant={charCount > maxChars ? "destructive" : "secondary"}
-              className="transition-colors duration-200"
+              className="transition-colors duration-200 text-sm"
             >
               {charCount}/{maxChars} chars
             </Badge>
-            <span className="text-xs sm:text-sm text-muted-foreground">
+            <span className="text-sm text-black/60 font-medium">
               Option {index + 1}
             </span>
           </div>
           {charCount > maxChars && (
-            <div className="flex items-center gap-1 text-destructive text-xs sm:text-sm">
-              <AlertCircle className="h-3 w-3 sm:h-4 sm:w-4" />
+            <div className="flex items-center gap-2 text-red-500 text-sm">
+              <AlertCircle className="h-4 w-4" />
               <span>Exceeds {platform} limit</span>
             </div>
           )}
         </div>
 
         <div
-          className="relative bg-muted/30 p-3 sm:p-4 rounded-md transition-colors duration-200 hover:bg-muted/50"
+          className="relative bg-black/5 p-4 sm:p-6 rounded-md transition-colors duration-200 hover:bg-black/10"
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
         >
-          <p className="text-sm sm:text-base whitespace-pre-wrap break-words">
+          <p className="text-base sm:text-lg whitespace-pre-wrap break-words text-black/80 leading-relaxed">
             {bio}
           </p>
           {showWarning && (
-            <div className="absolute inset-0 bg-destructive/10 flex items-center justify-center rounded-md">
-              <p className="text-destructive text-xs sm:text-sm font-medium">
+            <div className="absolute inset-0 bg-red-500/10 flex items-center justify-center rounded-md">
+              <p className="text-red-500 text-sm font-medium">
                 This bio exceeds the recommended length for {platform}
               </p>
             </div>
@@ -80,14 +80,14 @@ const BioOption = ({ bio, index, platform }) => {
         </div>
       </CardContent>
 
-      <CardFooter className="bg-muted/20 p-3 sm:p-4">
+      <CardFooter className="bg-black/5 p-4 sm:p-6">
         <TooltipProvider>
           <Tooltip>
             <TooltipTrigger asChild>
               <Button
                 variant="outline"
                 size="sm"
-                className="w-full sm:w-auto transition-all duration-200 hover:bg-primary hover:text-primary-foreground group relative overflow-hidden"
+                className="w-full sm:w-auto transition-all duration-200 hover:bg-black hover:text-white group relative overflow-hidden text-sm"
                 onClick={handleCopy}
               >
                 <span className="flex items-center gap-2">
@@ -106,11 +106,8 @@ const BioOption = ({ bio, index, platform }) => {
                 <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent translate-x-[-200%] group-hover:translate-x-[200%] transition-transform duration-1000"></span>
               </Button>
             </TooltipTrigger>
-            <TooltipContent
-              side="top"
-              className="bg-primary text-primary-foreground"
-            >
-              <p className="text-xs sm:text-sm">Click to copy to clipboard</p>
+            <TooltipContent side="top" className="bg-black text-white">
+              <p className="text-sm">Click to copy to clipboard</p>
             </TooltipContent>
           </Tooltip>
         </TooltipProvider>

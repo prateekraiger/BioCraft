@@ -3,17 +3,19 @@ import BioGenerator from "@/components/BioGenerator";
 
 const BioGeneratorPage = () => {
   return (
-    <div className="min-h-screen bg-background py-8">
-      <div className="container mx-auto px-4">
-        <div className="max-w-3xl mx-auto">
-          <h1 className="text-3xl sm:text-4xl font-bold text-center mb-2">
-            <span className="bg-gradient-to-r from-primary to-primary/60 bg-clip-text text-transparent">
-              Bio Generator
-            </span>
-          </h1>
-          <p className="text-center text-muted-foreground mb-8">
-            Create the perfect bio for your social media profiles
-          </p>
+    <div className="w-full min-h-screen bg-white/70 backdrop-blur-sm">
+      <div className="container mx-auto py-8 px-4">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-8">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-black mb-4">
+              Social Media Bio Generator
+            </h1>
+            <p className="text-base sm:text-lg text-black/70 max-w-2xl mx-auto">
+              Create engaging and professional bios for your social media
+              profiles. Perfect for personal branding, business accounts, and
+              professional networking.
+            </p>
+          </div>
           <BioGenerator />
         </div>
       </div>
