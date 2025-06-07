@@ -1,112 +1,134 @@
 import { useState } from "react";
-import { Link, useLocation } from "react-router-dom";
-import { Button } from "./ui/button";
-import { Sparkles } from "lucide-react";
+import { Link } from "react-router-dom";
+import { SignedIn, SignedOut, UserButton } from "@clerk/clerk-react";
+import { Menu, X } from "lucide-react";
 
 export function Navbar() {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const location = useLocation();
-
-  const isActive = (path: string) => location.pathname === path;
+  const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-black/10 bg-white/80 backdrop-blur-sm">
-      <div className="container flex h-16 items-center justify-between">
-        <div className="flex items-center gap-2">
-          <Link to="/" className="flex items-center gap-2">
-            <Sparkles className="h-6 w-6 text-black" />
-            <span className="text-xl font-bold text-black">BioCraft</span>
+    <nav className="fixed top-0 left-0 right-0 z-50 bg-white border-b border-gray-200">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex items-center justify-between h-16">
+          {/* Logo */}
+          <Link to="/" className="flex items-center space-x-2">
+            <span className="text-xl font-bold text-black">BioGen</span>
           </Link>
-        </div>
 
-        {/* Desktop Navigation */}
-        <nav className="hidden md:flex items-center gap-6">
-          <Link
-            to="/"
-            className={`text-sm font-medium transition-colors hover:text-black ${
-              isActive("/") ? "text-black" : "text-black/70"
-            }`}
-          >
-            Home
-          </Link>
-          <Link
-            to="/bio-generator"
-            className={`text-sm font-medium transition-colors hover:text-black ${
-              isActive("/bio-generator") ? "text-black" : "text-black/70"
-            }`}
-          >
-            Bio Generator
-          </Link>
-          <Link to="/bio-generator">
-            <Button className="bg-black text-white hover:bg-black/90">
-              Get Started
-            </Button>
-          </Link>
-        </nav>
-
-        {/* Mobile Menu Button */}
-        <button
-          className="md:hidden text-black/70 hover:text-black"
-          onClick={() => setIsMenuOpen(!isMenuOpen)}
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            className="h-6 w-6"
-          >
-            {isMenuOpen ? (
-              <>
-                <line x1="18" y1="6" x2="6" y2="18" />
-                <line x1="6" y1="6" x2="18" y2="18" />
-              </>
-            ) : (
-              <>
-                <line x1="4" y1="12" x2="20" y2="12" />
-                <line x1="4" y1="6" x2="20" y2="6" />
-                <line x1="4" y1="18" x2="20" y2="18" />
-              </>
-            )}
-          </svg>
-        </button>
-      </div>
-
-      {/* Mobile Navigation */}
-      {isMenuOpen && (
-        <div className="md:hidden border-t border-black/10 bg-white/90 backdrop-blur-sm">
-          <nav className="container flex flex-col gap-4 py-4">
+          {/* Desktop Navigation */}
+          <div className="hidden md:flex items-center space-x-8">
             <Link
               to="/"
-              className={`text-sm font-medium transition-colors hover:text-black ${
-                isActive("/") ? "text-black" : "text-black/70"
-              }`}
-              onClick={() => setIsMenuOpen(false)}
+              className="text-gray-600 hover:text-black transition-colors"
             >
               Home
             </Link>
             <Link
-              to="/bio-generator"
-              className={`text-sm font-medium transition-colors hover:text-black ${
-                isActive("/bio-generator") ? "text-black" : "text-black/70"
-              }`}
-              onClick={() => setIsMenuOpen(false)}
+              to="/about"
+              className="text-gray-600 hover:text-black transition-colors"
             >
-              Bio Generator
+              About
             </Link>
-            <Link to="/bio-generator" onClick={() => setIsMenuOpen(false)}>
-              <Button className="w-full bg-black text-white hover:bg-black/90">
-                Get Started
-              </Button>
+            <Link
+              to="/contact"
+              className="text-gray-600 hover:text-black transition-colors"
+            >
+              Contact
             </Link>
-          </nav>
+            <SignedIn>
+              <Link
+                to="/"
+                className="px-4 py-2 rounded-lg bg-black text-white font-medium hover:bg-black/90 transition-all duration-200"
+              >
+                Create Bio
+              </Link>
+              <UserButton afterSignOutUrl="/" />
+            </SignedIn>
+            <SignedOut>
+              <Link
+                to="/sign-in"
+                className="text-gray-600 hover:text-black transition-colors"
+              >
+                Sign In
+              </Link>
+              <Link
+                to="/sign-up"
+                className="px-4 py-2 rounded-lg bg-black text-white font-medium hover:bg-black/90 transition-all duration-200"
+              >
+                Sign Up
+              </Link>
+            </SignedOut>
+          </div>
+
+          {/* Mobile menu button */}
+          <div className="md:hidden">
+            <button
+              onClick={() => setIsOpen(!isOpen)}
+              className="text-gray-600 hover:text-black transition-colors"
+            >
+              {isOpen ? (
+                <X className="h-6 w-6" />
+              ) : (
+                <Menu className="h-6 w-6" />
+              )}
+            </button>
+          </div>
+        </div>
+      </div>
+
+      {/* Mobile Navigation */}
+      {isOpen && (
+        <div className="md:hidden">
+          <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-white border-b border-gray-200">
+            <Link
+              to="/"
+              className="block px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:text-black hover:bg-gray-50 transition-colors"
+              onClick={() => setIsOpen(false)}
+            >
+              Home
+            </Link>
+            <Link
+              to="/about"
+              className="block px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:text-black hover:bg-gray-50 transition-colors"
+              onClick={() => setIsOpen(false)}
+            >
+              About
+            </Link>
+            <Link
+              to="/contact"
+              className="block px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:text-black hover:bg-gray-50 transition-colors"
+              onClick={() => setIsOpen(false)}
+            >
+              Contact
+            </Link>
+            <SignedIn>
+              <Link
+                to="/"
+                className="block px-3 py-2 rounded-md text-base font-medium text-white bg-black hover:bg-black/90 transition-all duration-200"
+                onClick={() => setIsOpen(false)}
+              >
+                Create Bio
+              </Link>
+            </SignedIn>
+            <SignedOut>
+              <Link
+                to="/sign-in"
+                className="block px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:text-black hover:bg-gray-50 transition-colors"
+                onClick={() => setIsOpen(false)}
+              >
+                Sign In
+              </Link>
+              <Link
+                to="/sign-up"
+                className="block px-3 py-2 rounded-md text-base font-medium text-white bg-black hover:bg-black/90 transition-all duration-200"
+                onClick={() => setIsOpen(false)}
+              >
+                Sign Up
+              </Link>
+            </SignedOut>
+          </div>
         </div>
       )}
-    </header>
+    </nav>
   );
 }

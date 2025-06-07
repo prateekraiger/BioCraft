@@ -1,26 +1,26 @@
-import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Layout from "@/components/Layout";
-import HomePage from "@/pages/HomePage";
-import BioGeneratorPage from "@/pages/BioGeneratorPage";
-import { InteractiveGrid } from "@/components/ui/interactive-grid";
+import { Toaster } from "react-hot-toast";
+import { Navbar } from "./components/Navbar";
+import BioGenerator from "./components/BioGenerator";
+import { AboutPage } from "./pages/AboutPage";
+import { Contact } from "./pages/Contact";
+import HomePage from "./pages/HomePage";
 
-function App() {
+export default function App() {
   return (
     <Router>
-      <div className="relative min-h-screen w-full overflow-x-hidden">
-        <InteractiveGrid className="fixed inset-0 z-0" />
-        <div className="relative z-10">
+      <div className="min-h-screen bg-white">
+        <Navbar />
+        <main className="pt-16">
           <Routes>
-            <Route path="/" element={<Layout />}>
-              <Route index element={<HomePage />} />
-              <Route path="bio-generator" element={<BioGeneratorPage />} />
-            </Route>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/bio-generator" element={<BioGenerator />} />
+            <Route path="/about" element={<AboutPage />} />
+            <Route path="/contact" element={<Contact />} />
           </Routes>
-        </div>
+        </main>
+        <Toaster position="top-center" />
       </div>
     </Router>
   );
 }
-
-export default App;

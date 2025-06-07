@@ -426,7 +426,7 @@ const BioGenerator = () => {
             </CardContent>
 
             <CardFooter className="flex flex-col gap-4 px-4 sm:px-8 pb-6 sm:pb-8 border-t border-black/10 mt-8">
-              <div className="flex flex-col sm:flex-row gap-3 justify-center items-center w-full">
+              <div className="flex flex-col sm:flex-row gap-3 justify-center items-center w-full max-w-md mx-auto">
                 <Button
                   type="submit"
                   disabled={isGenerating}
@@ -486,33 +486,27 @@ const BioGenerator = () => {
               ))}
             </div>
           </CardContent>
-          <CardFooter className="flex flex-col sm:flex-row justify-between gap-4 px-6 sm:px-8 pb-6 sm:pb-8 border-t border-black/10">
-            <Button
-              type="button"
-              variant="outline"
-              onClick={() => setActiveTab("form")}
-              className="w-full sm:w-auto"
-            >
-              Back to Editor
-            </Button>
-            <Button
-              type="button"
-              onClick={() => {
-                setBioOptions([]);
-                handleSubmit();
-              }}
-              disabled={isGenerating}
-              className="w-full sm:w-auto bg-black text-white hover:bg-black/90"
-            >
-              {isGenerating ? (
+          <CardFooter className="flex flex-col sm:flex-row justify-center gap-4 px-6 sm:px-8 pb-6 sm:pb-8 border-t border-black/10">
+            <div className="flex flex-col sm:flex-row gap-3 justify-center items-center w-full max-w-md mx-auto">
+              <Button
+                type="button"
+                variant="outline"
+                onClick={() => setActiveTab("form")}
+                className="w-full sm:w-auto"
+              >
+                Back to Editor
+              </Button>
+              <Button
+                type="button"
+                onClick={generateBios}
+                className="w-full sm:w-auto bg-black text-white hover:bg-black/90"
+              >
                 <span className="flex items-center gap-2">
-                  <RefreshCw className="w-4 h-4 animate-spin" />
-                  Regenerate Bios
+                  <RefreshCw className="w-4 h-4" />
+                  Regenerate
                 </span>
-              ) : (
-                "Regenerate Bios"
-              )}
-            </Button>
+              </Button>
+            </div>
           </CardFooter>
         </TabsContent>
       </Tabs>

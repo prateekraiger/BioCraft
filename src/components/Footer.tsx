@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { FaTwitter, FaLinkedin, FaInstagram } from "react-icons/fa";
+import { FaTwitter, FaLinkedin, FaInstagram, FaGithub } from "react-icons/fa";
 
 export const Footer = () => {
   return (
@@ -14,7 +14,15 @@ export const Footer = () => {
 
           <div className="flex items-center gap-6">
             <a
-              href="https://twitter.com"
+              href="https://github.com/prateekraiger"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-black/70 hover:text-black transition-colors duration-300 transform hover:scale-110"
+            >
+              <FaGithub className="w-5 h-5" />
+            </a>
+            <a
+              href="https://x.com/mrpratik753"
               target="_blank"
               rel="noopener noreferrer"
               className="text-black/70 hover:text-black transition-colors duration-300 transform hover:scale-110"
@@ -22,7 +30,7 @@ export const Footer = () => {
               <FaTwitter className="w-5 h-5" />
             </a>
             <a
-              href="https://linkedin.com"
+              href="https://www.linkedin.com/in/pratik-r1104/"
               target="_blank"
               rel="noopener noreferrer"
               className="text-black/70 hover:text-black transition-colors duration-300 transform hover:scale-110"
@@ -30,7 +38,7 @@ export const Footer = () => {
               <FaLinkedin className="w-5 h-5" />
             </a>
             <a
-              href="https://instagram.com"
+              href="https://instagram.com/pratik.raiger"
               target="_blank"
               rel="noopener noreferrer"
               className="text-black/70 hover:text-black transition-colors duration-300 transform hover:scale-110"
