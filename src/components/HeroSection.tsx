@@ -114,7 +114,7 @@ export const HeroSection = () => {
           >
             <video
               ref={videoRef}
-              src="https://res.cloudinary.com/dk3pg4zly/video/upload/v1748456663/cursorful-video-1748456489610_q2ti3l.mp4"
+              src="https://res.cloudinary.com/dk3pg4zly/video/upload/v1749282325/BioCraft_Preview_zbycrt.mp4"
               autoPlay
               muted
               loop
