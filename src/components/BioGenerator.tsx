@@ -100,7 +100,7 @@ const BioGenerator = () => {
           apiError
         );
         // Fallback to local generation if API fails
-        generatedBios = generateFallbackBios(formData);
+        generatedBios = generateFallbackBios(formData, limit);
       }
 
       // Ensure all bios respect the platform's character limit
