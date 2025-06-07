@@ -15,7 +15,7 @@ BioCraft helps you craft engaging, professional, and platform-optimized bios for
 - **Copy to Clipboard:** One-click copy for any generated bio
 - **Responsive UI:** Seamless experience on desktop and mobile
 
-## 🛠 Tech Stack
+## Tech Stack
 
 - **Frontend:** React + TypeScript
 - **Build Tool:** Vite
@@ -24,7 +24,7 @@ BioCraft helps you craft engaging, professional, and platform-optimized bios for
 - **Animations:** Framer Motion
 - **Routing:** React Router
 
-##  Getting Started
+## Getting Started
 
 ### Prerequisites
 
