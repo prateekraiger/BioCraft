@@ -1,18 +1,25 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { SignedIn, SignedOut, UserButton } from "@clerk/clerk-react";
+import {
+  SignedIn,
+  SignedOut,
+  UserButton,
+  SignInButton,
+  SignUpButton,
+} from "@clerk/clerk-react";
 import { Menu, X } from "lucide-react";
+import { Logo } from "./Logo";
 
 export function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-white border-b border-gray-200">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="w-full px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
-          <Link to="/" className="flex items-center space-x-2">
-            <span className="text-xl font-bold text-black">BioGen</span>
+          <Link to="/" className="flex items-center">
+            <Logo />
           </Link>
 
           {/* Desktop Navigation */}
@@ -37,7 +44,7 @@ export function Navbar() {
             </Link>
             <SignedIn>
               <Link
-                to="/"
+                to="/bio-generator"
                 className="px-4 py-2 rounded-lg bg-black text-white font-medium hover:bg-black/90 transition-all duration-200"
               >
                 Create Bio
@@ -45,18 +52,13 @@ export function Navbar() {
               <UserButton afterSignOutUrl="/" />
             </SignedIn>
             <SignedOut>
-              <Link
-                to="/sign-in"
-                className="text-gray-600 hover:text-black transition-colors"
-              >
-                Sign In
-              </Link>
-              <Link
-                to="/sign-up"
-                className="px-4 py-2 rounded-lg bg-black text-white font-medium hover:bg-black/90 transition-all duration-200"
-              >
-                Sign Up
-              </Link>
+              <div className="flex items-center gap-2">
+                <SignInButton mode="modal">
+                  <button className="px-4 py-2 rounded-lg bg-black text-white font-medium hover:bg-black/90 transition-all duration-200">
+                    Get Started
+                  </button>
+                </SignInButton>
+              </div>
             </SignedOut>
           </div>
 
@@ -103,7 +105,7 @@ export function Navbar() {
             </Link>
             <SignedIn>
               <Link
-                to="/"
+                to="/bio-generator"
                 className="block px-3 py-2 rounded-md text-base font-medium text-white bg-black hover:bg-black/90 transition-all duration-200"
                 onClick={() => setIsOpen(false)}
               >
@@ -111,20 +113,11 @@ export function Navbar() {
               </Link>
             </SignedIn>
             <SignedOut>
-              <Link
-                to="/sign-in"
-                className="block px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:text-black hover:bg-gray-50 transition-colors"
-                onClick={() => setIsOpen(false)}
-              >
-                Sign In
-              </Link>
-              <Link
-                to="/sign-up"
-                className="block px-3 py-2 rounded-md text-base font-medium text-white bg-black hover:bg-black/90 transition-all duration-200"
-                onClick={() => setIsOpen(false)}
-              >
-                Sign Up
-              </Link>
+              <SignInButton mode="modal">
+                <button className="w-full px-3 py-2 rounded-md text-base font-medium text-white bg-black hover:bg-black/90 transition-all duration-200">
+                  Get Started
+                </button>
+              </SignInButton>
             </SignedOut>
           </div>
         </div>
