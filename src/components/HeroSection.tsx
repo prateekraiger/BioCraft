@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import { useState, useRef } from "react";
 import { motion } from "framer-motion";
 import {
   Sparkles,
@@ -8,10 +8,8 @@ import {
   MessageCircle,
   Facebook,
   Play,
-  Pause,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
 import { Link } from "react-router-dom";
 
 export const HeroSection = () => {

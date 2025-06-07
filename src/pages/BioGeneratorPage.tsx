@@ -1,4 +1,3 @@
-import React from "react";
 import BioGenerator from "../components/BioGenerator";
 import { motion } from "framer-motion";
 

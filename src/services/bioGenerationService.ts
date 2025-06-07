@@ -45,8 +45,7 @@ export const generateBiosWithAI = async (
 
 export const generateFallbackBios = (formData: FormData): string[] => {
   const bios: string[] = [];
-  const { platform, purpose, keywords, tone, achievements, interests } =
-    formData;
+  const { platform, purpose, keywords, achievements, interests } = formData;
 
   // Generate a professional bio
   bios.push(
