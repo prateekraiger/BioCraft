@@ -87,7 +87,8 @@ const BioGenerator = () => {
         Facebook: 101,
       };
 
-      const limit = platformLimits[formData.platform] || 150;
+      const limit =
+        platformLimits[formData.platform as keyof PlatformLimits] || 150;
 
       // Try to generate bios with AI
       let generatedBios: string[] = [];

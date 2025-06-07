@@ -8,7 +8,6 @@ export const generateBiosWithAI = async (
   limit: number
 ): Promise<string[]> => {
   try {
-    const prompt = generatePrompt(formData, limit);
     const response = await fetch(API_URL, {
       method: "POST",
       headers: {
@@ -19,69 +18,63 @@ export const generateBiosWithAI = async (
         model: "gpt-3.5-turbo",
         messages: [
           {
+            role: "system",
+            content: `You are a professional bio writer. Generate ${formData.platform} bios that are engaging, authentic, and within ${limit} characters.`,
+          },
+          {
             role: "user",
-            content: prompt,
+            content: generatePrompt(formData),
           },
         ],
         temperature: 0.7,
-        max_tokens: 1000,
+        max_tokens: 500,
       }),
     });
 
     if (!response.ok) {
-      throw new Error(`API request failed: ${response.statusText}`);
+      throw new Error("Failed to generate bios");
     }
 
     const data = await response.json();
-    const generatedText = data.choices[0].message.content;
-    return parseGeneratedBios(generatedText);
+    return parseGeneratedBios(data.choices[0].message.content);
   } catch (error) {
-    console.error("Error generating bios with AI:", error);
+    console.error("Error generating bios:", error);
     throw error;
   }
 };
 
 export const generateFallbackBios = (formData: FormData): string[] => {
-  const {
-    platform,
-    purpose,
-    keywords,
-    tone,
-    achievements,
-    interests,
-    useEmojis,
-    useHashtags,
-    useCta,
-  } = formData;
+  const bios: string[] = [];
+  const { platform, purpose, keywords, tone, achievements, interests } =
+    formData;
 
-  const bios = [
-    `${keywords} | ${purpose} | ${
-      achievements ? `Achievements: ${achievements} | ` : ""
-    }${interests ? `Interests: ${interests}` : ""}`,
-    `${purpose} specialist | ${keywords} | ${
-      achievements ? `Awarded: ${achievements} | ` : ""
-    }${interests ? `Passionate about ${interests}` : ""}`,
-    `${keywords} enthusiast | ${purpose} professional | ${
-      achievements ? `Notable: ${achievements} | ` : ""
-    }${interests ? `Loves ${interests}` : ""}`,
-  ];
+  // Generate a professional bio
+  bios.push(
+    `${
+      purpose === "business" ? "Business" : "Professional"
+    } ${platform} bio:\n` +
+      `${keywords}\n` +
+      `${achievements ? `\n${achievements}` : ""}\n` +
+      `${interests ? `\nInterests: ${interests}` : ""}`
+  );
 
-  return bios.map((bio) => {
-    let enhancedBio = bio;
-    if (useEmojis) {
-      enhancedBio = enhancedBio.replace(/\|/g, " ✨ ");
-    }
-    if (useHashtags) {
-      enhancedBio = enhancedBio.replace(/\b(\w+)\b/g, (match) => {
-        if (match.length > 3) return `#${match}`;
-        return match;
-      });
-    }
-    if (useCta) {
-      enhancedBio += " | Let's connect!";
-    }
-    return enhancedBio;
-  });
+  // Generate a casual bio
+  bios.push(
+    `Casual ${platform} bio:\n` +
+      `${keywords}\n` +
+      `${interests ? `\nLoves: ${interests}` : ""}\n` +
+      `${achievements ? `\n${achievements}` : ""}`
+  );
+
+  // Generate a creative bio
+  bios.push(
+    `Creative ${platform} bio:\n` +
+      `${keywords}\n` +
+      `${interests ? `\n✨ ${interests}` : ""}\n` +
+      `${achievements ? `\n🎯 ${achievements}` : ""}`
+  );
+
+  return bios;
 };
 
 export const trimBiosToLimit = (bios: string[], limit: number): string[] => {
@@ -91,7 +84,7 @@ export const trimBiosToLimit = (bios: string[], limit: number): string[] => {
   });
 };
 
-const generatePrompt = (formData: FormData, limit: number): string => {
+const generatePrompt = (formData: FormData): string => {
   const {
     platform,
     purpose,
@@ -104,34 +97,42 @@ const generatePrompt = (formData: FormData, limit: number): string => {
     useCta,
   } = formData;
 
-  return `Generate 3 unique and engaging social media bios for ${platform} with the following details:
+  return `Generate 3 different ${platform} bios with the following details:
 - Purpose: ${purpose}
 - Keywords: ${keywords}
-- Tone: ${tone || "professional"}
+- Tone: ${tone}
 ${achievements ? `- Achievements: ${achievements}` : ""}
 ${interests ? `- Interests: ${interests}` : ""}
 ${useEmojis ? "- Include relevant emojis" : ""}
 ${useHashtags ? "- Include relevant hashtags" : ""}
 ${useCta ? "- Include a call-to-action" : ""}
 
-Requirements:
-- Each bio must be under ${limit} characters
-- Make it unique and engaging
-- Match the specified tone
-- Be platform-appropriate for ${platform}
-- Include the provided keywords naturally
-${achievements ? "- Highlight the achievements" : ""}
-${interests ? "- Incorporate the interests" : ""}
-
-Format the response as a numbered list of bios, one per line.`;
+Make each bio unique and engaging while maintaining the specified tone.`;
 };
 
-const parseGeneratedBios = (text: string): string[] => {
-  // Split by newlines and remove empty lines
-  const lines = text.split("\n").filter((line) => line.trim());
+const parseGeneratedBios = (content: string): string[] => {
+  // Split the content by newlines and filter out empty lines
+  const lines = content.split("\n").filter((line) => line.trim());
 
-  // Extract bios from numbered lines (e.g., "1. Bio text" or "1) Bio text")
-  return lines
-    .map((line) => line.replace(/^\d+[\.\)]\s*/, "").trim())
-    .filter((bio) => bio.length > 0);
+  // Group lines into bios (assuming each bio is separated by a blank line)
+  const bios: string[] = [];
+  let currentBio: string[] = [];
+
+  lines.forEach((line) => {
+    if (line.trim() === "") {
+      if (currentBio.length > 0) {
+        bios.push(currentBio.join("\n"));
+        currentBio = [];
+      }
+    } else {
+      currentBio.push(line);
+    }
+  });
+
+  // Add the last bio if there is one
+  if (currentBio.length > 0) {
+    bios.push(currentBio.join("\n"));
+  }
+
+  return bios;
 };

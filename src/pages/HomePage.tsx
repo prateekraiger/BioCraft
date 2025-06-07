@@ -9,13 +9,14 @@ import {
   Twitter,
   Linkedin,
   Facebook,
-  Youtube,
+  MessageSquare,
 } from "lucide-react";
 
 const HomePage = () => {
   return (
     <div className="container mx-auto px-4">
       <HeroSection />
+      <VideoPreviewSection />
       <FeaturesSection />
       <HowItWorksSection />
       <TestimonialsSection />
@@ -45,26 +46,26 @@ const HeroSection = () => {
         </Link>
 
         {/* Social Media Icons */}
-        <div className="mt-12 flex justify-center items-center gap-8">
-          <div className="flex flex-col items-center gap-2">
-            <Instagram className="w-8 h-8 text-black/80" />
-            <span className="text-sm text-gray-600">Instagram</span>
+        <div className="mt-12 flex flex-wrap justify-center items-center gap-4 sm:gap-6 md:gap-8">
+          <div className="flex flex-col items-center gap-2 transform transition-transform hover:scale-110">
+            <Instagram className="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 text-black/80" />
+            <span className="text-xs sm:text-sm text-gray-600">Instagram</span>
           </div>
-          <div className="flex flex-col items-center gap-2">
-            <Twitter className="w-8 h-8 text-black/80" />
-            <span className="text-sm text-gray-600">Twitter</span>
+          <div className="flex flex-col items-center gap-2 transform transition-transform hover:scale-110">
+            <Twitter className="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 text-black/80" />
+            <span className="text-xs sm:text-sm text-gray-600">Twitter</span>
           </div>
-          <div className="flex flex-col items-center gap-2">
-            <Linkedin className="w-8 h-8 text-black/80" />
-            <span className="text-sm text-gray-600">LinkedIn</span>
+          <div className="flex flex-col items-center gap-2 transform transition-transform hover:scale-110">
+            <Linkedin className="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 text-black/80" />
+            <span className="text-xs sm:text-sm text-gray-600">LinkedIn</span>
           </div>
-          <div className="flex flex-col items-center gap-2">
-            <Facebook className="w-8 h-8 text-black/80" />
-            <span className="text-sm text-gray-600">Facebook</span>
+          <div className="flex flex-col items-center gap-2 transform transition-transform hover:scale-110">
+            <Facebook className="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 text-black/80" />
+            <span className="text-xs sm:text-sm text-gray-600">Facebook</span>
           </div>
-          <div className="flex flex-col items-center gap-2">
-            <Youtube className="w-8 h-8 text-black/80" />
-            <span className="text-sm text-gray-600">YouTube</span>
+          <div className="flex flex-col items-center gap-2 transform transition-transform hover:scale-110">
+            <MessageSquare className="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 text-black/80" />
+            <span className="text-xs sm:text-sm text-gray-600">WhatsApp</span>
           </div>
         </div>
       </div>
@@ -112,6 +113,36 @@ const FeaturesSection = () => {
             </p>
           </div>
         </div>
+      </div>
+    </section>
+  );
+};
+
+const VideoPreviewSection = () => {
+  return (
+    <section className="py-24 bg-gradient-to-b from-white to-gray-50">
+      <div className="max-w-6xl mx-auto">
+        <div className="relative rounded-2xl overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.15)] border border-gray-200 mx-auto transform hover:scale-[1.01] transition-all duration-300">
+          <video
+            className="w-full h-auto"
+            controls
+            autoPlay
+            muted
+            loop
+            playsInline
+          >
+            <source
+              src="https://res.cloudinary.com/dk3pg4zly/video/upload/v1749282325/BioCraft_Preview_zbycrt.mp4"
+              type="video/mp4"
+            />
+            Your browser does not support the video tag.
+          </video>
+          <div className="absolute inset-0 pointer-events-none bg-gradient-to-t from-black/20 to-transparent"></div>
+        </div>
+        <p className="mt-8 text-lg text-gray-600 max-w-3xl mx-auto text-center">
+          Watch how easily you can create professional, engaging bios for all
+          your social media profiles in just a few clicks.
+        </p>
       </div>
     </section>
   );

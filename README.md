@@ -1,30 +1,85 @@
-# React + TypeScript + Vite
+# Bio Generator - AI-Powered Social Media Bio Creator
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+![Bio Generator](https://res.cloudinary.com/dk3pg4zly/image/upload/v1749285059/Screenshot_2025-06-07_140034_kzdfuk.png)
 
-Currently, two official plugins are available:
+Bio Generator is a modern web application that helps users create engaging, professional bios for various social media platforms using AI technology. Built with React, TypeScript, and Vite, this application offers a seamless user experience with a beautiful UI powered by shadcn/ui components.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Features
 
-All shadcn/ui components have been downloaded under `@/components/ui`.
+- **Multi-Platform Support**: Generate bios for Instagram, Twitter, LinkedIn, Facebook, WhatsApp, and more
+- **AI-Powered Generation**: Uses GPT-3.5 to create personalized, engaging bios
+- **Customization Options**: Adjust tone, include emojis, hashtags, and calls-to-action
+- **Character Limit Awareness**: Automatically trims bios to match platform-specific limits
+- **Multiple Options**: Generate several bio variations to choose from
+- **Fallback Generation**: Local generation when API is unavailable
+- **Copy to Clipboard**: Easily copy your favorite bio with one click
+- **Responsive Design**: Works seamlessly on desktop and mobile devices
 
-## Commands
+## Tech Stack
 
-**Install Dependencies**
+- **Frontend**: React with TypeScript
+- **Build Tool**: Vite
+- **Styling**: Tailwind CSS
+- **UI Components**: shadcn/ui
+- **Animations**: Framer Motion
+- **Routing**: React Router
+
+## Getting Started
+
+### Prerequisites
+
+- Node.js (v14 or higher)
+- pnpm package manager
+
+### Installation
+
+1. Clone the repository
+2. Install dependencies:
 
 ```shell
 pnpm i
 ```
 
-**Start Preview**
+3. Create a `.env` file in the root directory with your API key:
+
+```
+VITE_API_KEY=your_api_key_here
+CLERK_PUBLISHABLE_KEY=your_clerk_publishable_key_here
+```
+
+### Development
+
+Start the development server:
 
 ```shell
 pnpm run dev
 ```
 
-**To build**
+### Building for Production
+
+Create a production build:
 
 ```shell
-Pnpm run build
+pnpm run build
 ```
+
+Preview the production build:
+
+```shell
+pnpm run preview
+```
+
+## Usage
+
+1. Select your target social media platform
+2. Enter keywords that describe you or your brand
+3. Choose the purpose of your bio (personal, business, etc.)
+4. Add optional achievements and interests
+5. Select your preferred tone
+6. Toggle options for emojis, hashtags, and calls-to-action
+7. Click "Generate Bio" to create multiple bio options
+8. Copy your favorite bio to use on your profile
+
+## License
+
+This project is licensed under the MIT License - see the [Apache License](LICENSE) file for details.
