@@ -1,78 +1,145 @@
 import React from "react";
-import { HeroSection } from "@/components/HeroSection";
-import { Button } from "@/components/ui/button";
-import { Sparkles, Target, Zap, Wand2 } from "lucide-react";
 import { Link } from "react-router-dom";
+import {
+  Target,
+  Zap,
+  Wand2,
+  Sparkles,
+  Instagram,
+  Twitter,
+  Linkedin,
+  Facebook,
+  Youtube,
+} from "lucide-react";
 
 const HomePage = () => {
   return (
-    <div className="min-h-screen">
+    <div className="container mx-auto px-4">
       <HeroSection />
-
-      {/* Features Section */}
-      <section className="py-16 px-4 sm:px-6">
-        <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl sm:text-4xl font-bold mb-4">
-              Why Choose{" "}
-              <span className="bg-gradient-to-r from-primary to-primary/60 bg-clip-text text-transparent">
-                BioCraft
-              </span>
-              ?
-            </h2>
-            <p className="text-lg text-muted-foreground">
-              Create engaging bios that make your social media profiles stand
-              out
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {[
-              {
-                title: "Platform Optimized",
-                description:
-                  "Tailored bios for each social media platform's unique requirements",
-                icon: <Target className="w-10 h-10 text-black/80" />,
-              },
-              {
-                title: "AI-Powered",
-                description:
-                  "Advanced AI technology to generate creative and engaging bios",
-                icon: <Wand2 className="w-10 h-10 text-black/80" />,
-              },
-              {
-                title: "Instant Results",
-                description:
-                  "Get multiple bio options in seconds, ready to use",
-                icon: <Zap className="w-10 h-10 text-black/80" />,
-              },
-            ].map((feature, index) => (
-              <div
-                key={index}
-                className="p-6 rounded-lg bg-muted/30 hover:bg-muted/50 transition-colors duration-200"
-              >
-                <div className="mb-4">{feature.icon}</div>
-                <h3 className="text-xl font-semibold mb-2">{feature.title}</h3>
-                <p className="text-muted-foreground">{feature.description}</p>
-              </div>
-            ))}
-          </div>
-
-          <div className="text-center mt-12">
-            <Link to="/generateBio">
-              <Button className="px-8 py-6 text-lg bg-black text-white hover:bg-black/90 transition-all duration-200 shadow-lg hover:shadow-xl group relative overflow-hidden">
-                <span className="flex items-center gap-2 relative z-10">
-                  <Sparkles className="w-5 h-5 transition-transform duration-200 group-hover:scale-110" />
-                  Generate Your Bio
-                </span>
-                <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent translate-x-[-200%] group-hover:translate-x-[200%] transition-transform duration-1000" />
-              </Button>
-            </Link>
-          </div>
-        </div>
-      </section>
+      <FeaturesSection />
+      <HowItWorksSection />
+      <TestimonialsSection />
+      <PricingSection />
+      <FAQSection />
+      <CTASection />
     </div>
   );
+};
+
+const HeroSection = () => {
+  return (
+    <section className="pt-20 pb-12">
+      <div className="max-w-3xl mx-auto text-center">
+        <h1 className="text-5xl md:text-6xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-black to-gray-600">
+          Craft Your Perfect Bio
+        </h1>
+        <p className="text-xl md:text-2xl text-gray-600 mb-8">
+          Generate professional, engaging bios for any social platform with AI
+        </p>
+        <Link
+          to="/generateBio"
+          className="inline-flex items-center px-8 py-4 text-lg font-medium text-white bg-black rounded-lg hover:bg-gray-800 transition-all duration-300 hover:shadow-xl group"
+        >
+          <Sparkles className="w-5 h-5 mr-2 transition-transform duration-300 group-hover:scale-110" />
+          Generate Bio
+        </Link>
+
+        {/* Social Media Icons */}
+        <div className="mt-12 flex justify-center items-center gap-8">
+          <div className="flex flex-col items-center gap-2">
+            <Instagram className="w-8 h-8 text-black/80" />
+            <span className="text-sm text-gray-600">Instagram</span>
+          </div>
+          <div className="flex flex-col items-center gap-2">
+            <Twitter className="w-8 h-8 text-black/80" />
+            <span className="text-sm text-gray-600">Twitter</span>
+          </div>
+          <div className="flex flex-col items-center gap-2">
+            <Linkedin className="w-8 h-8 text-black/80" />
+            <span className="text-sm text-gray-600">LinkedIn</span>
+          </div>
+          <div className="flex flex-col items-center gap-2">
+            <Facebook className="w-8 h-8 text-black/80" />
+            <span className="text-sm text-gray-600">Facebook</span>
+          </div>
+          <div className="flex flex-col items-center gap-2">
+            <Youtube className="w-8 h-8 text-black/80" />
+            <span className="text-sm text-gray-600">YouTube</span>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+const FeaturesSection = () => {
+  return (
+    <section className="py-20 bg-white">
+      <div className="max-w-5xl mx-auto">
+        <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">
+          Why Choose{" "}
+          <span className="bg-gradient-to-r from-black to-gray-600 bg-clip-text text-transparent">
+            BioCraft
+          </span>
+          ?
+        </h2>
+        <div className="grid md:grid-cols-3 gap-8">
+          <div className="text-center p-6 rounded-xl hover:bg-gray-50 transition-colors duration-300">
+            <div className="flex justify-center mb-4">
+              <Target className="w-10 h-10 text-black/80" />
+            </div>
+            <h3 className="text-xl font-semibold mb-2">Platform Optimized</h3>
+            <p className="text-gray-600">
+              Tailored bios for Instagram, Twitter, LinkedIn, and more
+            </p>
+          </div>
+          <div className="text-center p-6 rounded-xl hover:bg-gray-50 transition-colors duration-300">
+            <div className="flex justify-center mb-4">
+              <Wand2 className="w-10 h-10 text-black/80" />
+            </div>
+            <h3 className="text-xl font-semibold mb-2">AI-Powered</h3>
+            <p className="text-gray-600">
+              Advanced AI technology for perfect bio generation
+            </p>
+          </div>
+          <div className="text-center p-6 rounded-xl hover:bg-gray-50 transition-colors duration-300">
+            <div className="flex justify-center mb-4">
+              <Zap className="w-10 h-10 text-black/80" />
+            </div>
+            <h3 className="text-xl font-semibold mb-2">Instant Results</h3>
+            <p className="text-gray-600">
+              Get your bio in seconds, ready to use
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+const HowItWorksSection = () => {
+  // Implementation of HowItWorksSection
+  return null;
+};
+
+const TestimonialsSection = () => {
+  // Implementation of TestimonialsSection
+  return null;
+};
+
+const PricingSection = () => {
+  // Implementation of PricingSection
+  return null;
+};
+
+const FAQSection = () => {
+  // Implementation of FAQSection
+  return null;
+};
+
+const CTASection = () => {
+  // Implementation of CTASection
+  return null;
 };
 
 export default HomePage;

@@ -4,7 +4,7 @@ import { Sparkles, Zap, Target, Users } from "lucide-react";
 
 export function AboutPage() {
   return (
-    <div className="min-h-screen bg-white py-16 px-4 sm:px-6">
+    <div className="min-h-screen  py-16 px-4 sm:px-6">
       <div className="max-w-4xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}

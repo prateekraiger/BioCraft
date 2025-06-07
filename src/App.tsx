@@ -10,8 +10,7 @@ import HomePage from "./pages/HomePage";
 export default function App() {
   return (
     <Router>
-      <div className="min-h-screen bg-white flex flex-col relative">
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]"></div>
+      <div className="min-h-screen bg-[#fafafa] bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]">
         <Navbar />
         <main className="flex-grow pt-16 relative z-10">
           <Routes>

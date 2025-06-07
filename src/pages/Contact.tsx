@@ -30,7 +30,7 @@ export function Contact() {
   };
 
   return (
-    <div className="min-h-screen bg-white pt-20 pb-8">
+    <div className="min-h-screen  pt-20 pb-8">
       <div className="max-w-4xl mx-auto px-4">
         {/* Header */}
         <motion.div
@@ -63,7 +63,7 @@ export function Contact() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.1 }}
-          className="bg-white rounded-2xl border border-gray-200 p-8 shadow-lg"
+          className=" rounded-2xl border border-gray-200 p-8 shadow-lg"
         >
           <form onSubmit={handleSubmit} className="space-y-6">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -82,7 +82,7 @@ export function Contact() {
                   onChange={handleChange}
                   placeholder="John Doe"
                   required
-                  className="w-full bg-white border-gray-300 text-gray-900 placeholder-gray-400 focus:border-black"
+                  className="w-full  border-gray-300 text-gray-900 placeholder-gray-400 focus:border-black"
                 />
               </div>
               <div>
@@ -100,7 +100,7 @@ export function Contact() {
                   onChange={handleChange}
                   placeholder="john@example.com"
                   required
-                  className="w-full bg-white border-gray-300 text-gray-900 placeholder-gray-400 focus:border-black"
+                  className="w-full  border-gray-300 text-gray-900 placeholder-gray-400 focus:border-black"
                 />
               </div>
             </div>
@@ -119,7 +119,7 @@ export function Contact() {
                   value={formData.errorType}
                   onChange={handleChange}
                   required
-                  className="w-full bg-white border-gray-300 text-gray-900 rounded-lg px-4 py-2 focus:border-black transition-colors"
+                  className="w-full  border-gray-300 text-gray-900 rounded-lg px-4 py-2 focus:border-black transition-colors"
                 >
                   <option value="">Select issue type</option>
                   <option value="bug">Bug/Error</option>
@@ -142,7 +142,7 @@ export function Contact() {
                   value={formData.platform}
                   onChange={handleChange}
                   required
-                  className="w-full bg-white border-gray-300 text-gray-900 rounded-lg px-4 py-2 focus:border-black transition-colors"
+                  className="w-full  border-gray-300 text-gray-900 rounded-lg px-4 py-2 focus:border-black transition-colors"
                 >
                   <option value="">Select platform</option>
                   <option value="web">Web Browser</option>
@@ -167,7 +167,7 @@ export function Contact() {
                 value={formData.browser}
                 onChange={handleChange}
                 placeholder="e.g., Chrome 120.0.6099.130"
-                className="w-full bg-white border-gray-300 text-gray-900 placeholder-gray-400 focus:border-black"
+                className="w-full  border-gray-300 text-gray-900 placeholder-gray-400 focus:border-black"
               />
             </div>
 
@@ -185,7 +185,7 @@ export function Contact() {
                 onChange={handleChange}
                 placeholder="Please describe the issue you're experiencing..."
                 required
-                className="w-full h-32 bg-white border-gray-300 text-gray-900 placeholder-gray-400 focus:border-black resize-none"
+                className="w-full h-32  border-gray-300 text-gray-900 placeholder-gray-400 focus:border-black resize-none"
               />
             </div>
 
@@ -203,7 +203,7 @@ export function Contact() {
                 onChange={handleChange}
                 placeholder="1. Go to...&#10;2. Click on...&#10;3. Observe..."
                 required
-                className="w-full h-32 bg-white border-gray-300 text-gray-900 placeholder-gray-400 focus:border-black resize-none"
+                className="w-full h-32  border-gray-300 text-gray-900 placeholder-gray-400 focus:border-black resize-none"
               />
             </div>
 
