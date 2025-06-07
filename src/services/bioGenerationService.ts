@@ -19,15 +19,15 @@ export const generateBiosWithAI = async (
         messages: [
           {
             role: "system",
-            content: `You are a professional bio writer. Generate ${formData.platform} bios that are engaging, authentic, and within ${limit} characters.`,
+            content: `You are a professional bio writer. Generate 3 different ${formData.platform} bios that are engaging, authentic, and MUST be within ${limit} characters each. Each bio should be separated by "---".`,
           },
           {
             role: "user",
-            content: generatePrompt(formData),
+            content: generatePrompt(formData, limit),
           },
         ],
         temperature: 0.7,
-        max_tokens: 500,
+        max_tokens: 1000,
       }),
     });
 
@@ -36,14 +36,18 @@ export const generateBiosWithAI = async (
     }
 
     const data = await response.json();
-    return parseGeneratedBios(data.choices[0].message.content);
+    const bios = parseGeneratedBios(data.choices[0].message.content);
+    return trimBiosToLimit(bios, limit);
   } catch (error) {
     console.error("Error generating bios:", error);
-    throw error;
+    return generateFallbackBios(formData, limit);
   }
 };
 
-export const generateFallbackBios = (formData: FormData): string[] => {
+export const generateFallbackBios = (
+  formData: FormData,
+  limit: number
+): string[] => {
   const bios: string[] = [];
   const { platform, purpose, keywords, achievements, interests } = formData;
 
@@ -73,17 +77,22 @@ export const generateFallbackBios = (formData: FormData): string[] => {
       `${achievements ? `\n🎯 ${achievements}` : ""}`
   );
 
-  return bios;
+  return trimBiosToLimit(bios, limit);
 };
 
 export const trimBiosToLimit = (bios: string[], limit: number): string[] => {
   return bios.map((bio) => {
     if (bio.length <= limit) return bio;
+    // Try to find a good breaking point (space or newline) near the limit
+    const breakPoint = bio.lastIndexOf(" ", limit - 3);
+    if (breakPoint > 0) {
+      return bio.slice(0, breakPoint) + "...";
+    }
     return bio.slice(0, limit - 3) + "...";
   });
 };
 
-const generatePrompt = (formData: FormData): string => {
+const generatePrompt = (formData: FormData, limit: number): string => {
   const {
     platform,
     purpose,
@@ -106,32 +115,17 @@ ${useEmojis ? "- Include relevant emojis" : ""}
 ${useHashtags ? "- Include relevant hashtags" : ""}
 ${useCta ? "- Include a call-to-action" : ""}
 
-Make each bio unique and engaging while maintaining the specified tone.`;
+Important requirements:
+1. Each bio MUST be within ${limit} characters
+2. Separate each bio with "---"
+3. Make each bio unique and engaging while maintaining the specified tone
+4. Do not include any labels or prefixes in the bios`;
 };
 
 const parseGeneratedBios = (content: string): string[] => {
-  // Split the content by newlines and filter out empty lines
-  const lines = content.split("\n").filter((line) => line.trim());
-
-  // Group lines into bios (assuming each bio is separated by a blank line)
-  const bios: string[] = [];
-  let currentBio: string[] = [];
-
-  lines.forEach((line) => {
-    if (line.trim() === "") {
-      if (currentBio.length > 0) {
-        bios.push(currentBio.join("\n"));
-        currentBio = [];
-      }
-    } else {
-      currentBio.push(line);
-    }
-  });
-
-  // Add the last bio if there is one
-  if (currentBio.length > 0) {
-    bios.push(currentBio.join("\n"));
-  }
-
-  return bios;
+  // Split by the separator and filter out empty entries
+  return content
+    .split("---")
+    .map((bio) => bio.trim())
+    .filter((bio) => bio.length > 0);
 };
