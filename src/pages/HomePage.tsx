@@ -1,7 +1,7 @@
 import React from "react";
 import { HeroSection } from "@/components/HeroSection";
 import { Button } from "@/components/ui/button";
-import { Sparkles } from "lucide-react";
+import { Sparkles, Target, Zap, Wand2 } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const HomePage = () => {
@@ -32,26 +32,26 @@ const HomePage = () => {
                 title: "Platform Optimized",
                 description:
                   "Tailored bios for each social media platform's unique requirements",
-                icon: "🎯",
+                icon: <Target className="w-10 h-10 text-black/80" />,
               },
               {
                 title: "AI-Powered",
                 description:
                   "Advanced AI technology to generate creative and engaging bios",
-                icon: "✨",
+                icon: <Wand2 className="w-10 h-10 text-black/80" />,
               },
               {
                 title: "Instant Results",
                 description:
                   "Get multiple bio options in seconds, ready to use",
-                icon: "⚡",
+                icon: <Zap className="w-10 h-10 text-black/80" />,
               },
             ].map((feature, index) => (
               <div
                 key={index}
                 className="p-6 rounded-lg bg-muted/30 hover:bg-muted/50 transition-colors duration-200"
               >
-                <div className="text-4xl mb-4">{feature.icon}</div>
+                <div className="mb-4">{feature.icon}</div>
                 <h3 className="text-xl font-semibold mb-2">{feature.title}</h3>
                 <p className="text-muted-foreground">{feature.description}</p>
               </div>
@@ -59,14 +59,11 @@ const HomePage = () => {
           </div>
 
           <div className="text-center mt-12">
-            <Link to="/bio-generator">
-              <Button
-                size="lg"
-                className="group relative overflow-hidden bg-primary hover:bg-primary/90"
-              >
-                <span className="flex items-center gap-2">
+            <Link to="/generateBio">
+              <Button className="px-8 py-6 text-lg bg-black text-white hover:bg-black/90 transition-all duration-200 shadow-lg hover:shadow-xl group relative overflow-hidden">
+                <span className="flex items-center gap-2 relative z-10">
                   <Sparkles className="w-5 h-5 transition-transform duration-200 group-hover:scale-110" />
-                  Start Creating Your Bio
+                  Generate Your Bio
                 </span>
                 <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent translate-x-[-200%] group-hover:translate-x-[200%] transition-transform duration-1000" />
               </Button>

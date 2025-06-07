@@ -26,25 +26,35 @@ export function Navbar() {
           <div className="hidden md:flex items-center space-x-8">
             <Link
               to="/"
-              className="text-gray-600 hover:text-black transition-colors"
+              className="text-gray-600 hover:text-black transition-colors relative group"
             >
               Home
+              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-black transition-all duration-300 group-hover:w-full"></span>
+            </Link>
+            <Link
+              to="/generateBio"
+              className="text-gray-600 hover:text-black transition-colors relative group"
+            >
+              Generate Bio
+              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-black transition-all duration-300 group-hover:w-full"></span>
             </Link>
             <Link
               to="/about"
-              className="text-gray-600 hover:text-black transition-colors"
+              className="text-gray-600 hover:text-black transition-colors relative group"
             >
               About
+              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-black transition-all duration-300 group-hover:w-full"></span>
             </Link>
             <Link
               to="/contact"
-              className="text-gray-600 hover:text-black transition-colors"
+              className="text-gray-600 hover:text-black transition-colors relative group"
             >
               Contact
+              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-black transition-all duration-300 group-hover:w-full"></span>
             </Link>
             <SignedIn>
               <Link
-                to="/bio-generator"
+                to="/generateBio"
                 className="px-4 py-2 rounded-lg bg-black text-white font-medium hover:bg-black/90 transition-all duration-200"
               >
                 Create Bio
@@ -90,6 +100,13 @@ export function Navbar() {
               Home
             </Link>
             <Link
+              to="/generateBio"
+              className="block px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:text-black hover:bg-gray-50 transition-colors"
+              onClick={() => setIsOpen(false)}
+            >
+              Generate Bio
+            </Link>
+            <Link
               to="/about"
               className="block px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:text-black hover:bg-gray-50 transition-colors"
               onClick={() => setIsOpen(false)}
@@ -105,7 +122,7 @@ export function Navbar() {
             </Link>
             <SignedIn>
               <Link
-                to="/bio-generator"
+                to="/generateBio"
                 className="block px-3 py-2 rounded-md text-base font-medium text-white bg-black hover:bg-black/90 transition-all duration-200"
                 onClick={() => setIsOpen(false)}
               >

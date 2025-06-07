@@ -93,12 +93,9 @@ export const HeroSection = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.6 }}
             >
-              <Link to="/bio-generator">
-                <Button
-                  size="lg"
-                  className="group relative overflow-hidden bg-primary hover:bg-primary/90"
-                >
-                  <span className="flex items-center gap-2">
+              <Link to="/generateBio">
+                <Button className="px-8 py-6 text-lg bg-black text-white hover:bg-black/90 transition-all duration-200 shadow-lg hover:shadow-xl group relative overflow-hidden">
+                  <span className="flex items-center gap-2 relative z-10">
                     <Sparkles className="w-5 h-5 transition-transform duration-200 group-hover:scale-110" />
                     Generate Your Bio
                   </span>

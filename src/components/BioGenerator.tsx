@@ -1,7 +1,7 @@
-import { useState } from "react";
-import { Button } from "../components/ui/button";
-import { Input } from "../components/ui/input";
-import { Textarea } from "../components/ui/textarea";
+import { useState, ChangeEvent, FormEvent } from "react";
+import { Button } from "./ui/button";
+import { Input } from "./ui/input";
+import { Textarea } from "./ui/textarea";
 import {
   generateBiosWithAI,
   generateFallbackBios,
@@ -13,7 +13,7 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "../components/ui/select";
+} from "./ui/select";
 import {
   Card,
   CardContent,
@@ -21,21 +21,17 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "../components/ui/card";
-import { RadioGroup, RadioGroupItem } from "../components/ui/radio-group";
-import { Label } from "../components/ui/label";
-import { Checkbox } from "../components/ui/checkbox";
-import {
-  Tabs,
-  TabsContent,
-  TabsList,
-  TabsTrigger,
-} from "../components/ui/tabs";
-import { RefreshCw } from "lucide-react";
+} from "./ui/card";
+import { RadioGroup, RadioGroupItem } from "./ui/radio-group";
+import { Label } from "./ui/label";
+import { Checkbox } from "./ui/checkbox";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "./ui/tabs";
+import { RefreshCw, Sparkles } from "lucide-react";
 import BioOption from "./BioOption";
+import { FormData, PlatformLimits } from "../types/bio";
 
 const BioGenerator = () => {
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<FormData>({
     platform: "",
     purpose: "",
     keywords: "",
@@ -47,19 +43,25 @@ const BioGenerator = () => {
     useCta: false,
   });
 
-  const [bioOptions, setBioOptions] = useState([]);
-  const [isGenerating, setIsGenerating] = useState(false);
-  const [activeTab, setActiveTab] = useState("form");
+  const [bioOptions, setBioOptions] = useState<string[]>([]);
+  const [isGenerating, setIsGenerating] = useState<boolean>(false);
+  const [activeTab, setActiveTab] = useState<string>("form");
 
-  const handleChange = (e) => {
-    const { name, value, type, checked } = e.target;
+  const handleChange = (
+    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    const { name, value, type } = e.target;
+    const checked = (e.target as HTMLInputElement).checked;
     setFormData({
       ...formData,
       [name]: type === "checkbox" ? checked : value,
     });
   };
 
-  const handleSelectChange = (name, value) => {
+  const handleSelectChange = (
+    name: keyof FormData,
+    value: string | boolean
+  ) => {
     setFormData({
       ...formData,
       [name]: value,
@@ -77,7 +79,7 @@ const BioGenerator = () => {
     }
 
     try {
-      const platformLimits = {
+      const platformLimits: PlatformLimits = {
         Instagram: 150,
         Twitter: 160,
         LinkedIn: 220,
@@ -88,7 +90,7 @@ const BioGenerator = () => {
       const limit = platformLimits[formData.platform] || 150;
 
       // Try to generate bios with AI
-      let generatedBios = [];
+      let generatedBios: string[] = [];
       try {
         // Call OpenRouter API to generate bios
         generatedBios = await generateBiosWithAI(formData, limit);
@@ -109,12 +111,16 @@ const BioGenerator = () => {
       setActiveTab("results");
     } catch (error) {
       console.error("Error generating bios:", error);
-      alert(`Failed to generate bios: ${error.message}. Please try again.`);
+      alert(
+        `Failed to generate bios: ${
+          error instanceof Error ? error.message : "Unknown error"
+        }. Please try again.`
+      );
       setIsGenerating(false);
     }
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     await generateBios();
   };
@@ -425,27 +431,33 @@ const BioGenerator = () => {
               </div>
             </CardContent>
 
-            <CardFooter className="flex flex-col gap-4 px-4 sm:px-8 pb-6 sm:pb-8 border-t border-black/10 mt-8">
-              <div className="flex flex-col sm:flex-row gap-3 justify-center items-center w-full max-w-md mx-auto">
+            <CardFooter className="flex flex-col gap-4 px-4 sm:px-8 pb-6 sm:pb-8 border-t border-black/10 mt-12">
+              <div className="flex flex-col sm:flex-row gap-3 justify-center items-center w-full max-w-md mx-auto mt-8">
                 <Button
                   type="submit"
                   disabled={isGenerating}
-                  className="w-full sm:w-auto px-8 py-2 bg-black text-white hover:bg-black/90"
+                  className="w-full sm:w-auto px-8 py-3 bg-black text-white hover:bg-black/90 transition-all duration-200 shadow-lg hover:shadow-xl group relative overflow-hidden"
                 >
-                  {isGenerating ? (
-                    <span className="flex items-center gap-2">
-                      <RefreshCw className="w-4 h-4 animate-spin" />
-                      Generating...
-                    </span>
-                  ) : (
-                    "Generate Bio"
-                  )}
+                  <span className="flex items-center gap-2 relative z-10">
+                    {isGenerating ? (
+                      <>
+                        <RefreshCw className="w-5 h-5 animate-spin" />
+                        Generating...
+                      </>
+                    ) : (
+                      <>
+                        <Sparkles className="w-5 h-5 transition-transform duration-200 group-hover:scale-110" />
+                        Generate Bio
+                      </>
+                    )}
+                  </span>
+                  <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent translate-x-[-200%] group-hover:translate-x-[200%] transition-transform duration-1000" />
                 </Button>
                 <Button
                   type="button"
                   variant="outline"
                   onClick={resetForm}
-                  className="w-full sm:w-auto px-8 py-2 border-black/20 hover:bg-black/5 hover:border-black/30 text-black/70 hover:text-black"
+                  className="w-full sm:w-auto px-8 py-3 border-black/20 hover:bg-black/5 hover:border-black/30 text-black/70 hover:text-black transition-all duration-200"
                 >
                   <span className="flex items-center gap-2">
                     <svg
